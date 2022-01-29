@@ -7,10 +7,14 @@ public class User {
 
     public User() {}
 
-    public User(int id, String name, String surname) {
-        setId(id);
+    public User(String name, String surname) {
         setName(name);
         setSurname(surname);
+    }
+
+    public User(int id, String name, String surname) {
+        this(name, surname);
+        setId(id);
     }
 
     public int getId() {
@@ -39,10 +43,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                '}';
+        return id + " " + name + " " + surname;
     }
 }
