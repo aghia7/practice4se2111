@@ -1,4 +1,5 @@
 import db.DB;
+import db.mysql.MySQL;
 import db.postgres.Postgres;
 import models.User;
 import repositories.EntityRepository;
@@ -11,7 +12,7 @@ public class Main {
     private static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-        DB db = new Postgres();
+        DB db = new MySQL();
         EntityRepository<User> userRepo = new UserRepository(db);
 
         while (true) {
