@@ -2,16 +2,13 @@ package repositories.user;
 
 import db.DB;
 import models.User;
-import repositories.EntityRepository;
+import repositories.interfaces.IUserRepository;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserRepository implements EntityRepository<User> {
+public class UserRepository implements IUserRepository {
     private final DB db;
 
     public UserRepository(DB db) {
@@ -60,9 +57,10 @@ public class UserRepository implements EntityRepository<User> {
     public boolean create(User user) {
         Connection conn = db.getConnection();
         try {
-            Statement stmt = conn.createStatement();
-            stmt.execute("INSERT INTO users(name, surname) " +
-                    "VALUES('" + user.getName() + "','" + user.getSurname() + "')");
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO users(name, surname) VALUES(?, ?)");
+            stmt.setString(1, user.getName());
+            stmt.setString(2, user.getSurname());
+            stmt.execute();
             return true;
         } catch (SQLException e) {
             e.printStackTrace();

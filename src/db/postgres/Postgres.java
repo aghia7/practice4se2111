@@ -6,8 +6,9 @@ import java.sql.*;
 
 public class Postgres implements DB {
     private Connection conn;
+    private static Postgres instance = new Postgres();
 
-    public Postgres() {
+    private Postgres() {
         String connectionUrl = "jdbc:postgresql://localhost:5432/simpleappdb";
 
         try {
@@ -19,6 +20,11 @@ public class Postgres implements DB {
             System.out.println(e.getMessage());
         }
     }
+
+    public static Postgres getInstance() {
+        return instance;
+    }
+
     @Override
     public Connection getConnection() {
         return conn;

@@ -1,4 +1,4 @@
-package repositories;
+package repositories.interfaces;
 import java.util.List;
 
 public interface EntityRepository<Entity> {
